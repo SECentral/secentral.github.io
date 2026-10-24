@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="{{ site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ $title := printf "%s · %s" .Title site.Title }}
+  {{ if .IsHome }}{{ $title = printf "%s — %s" site.Title .Title }}{{ end }}
+  {{ $description := .Description | default site.Params.description }}
+  <title>{{ $title }}</title>
+  <meta name="description" content="{{ $description }}">
+  {{ if eq .Kind "404" }}<meta name="robots" content="noindex">{{ else }}<link rel="canonical" href="{{ .Permalink }}">{{ end }}
+  <meta name="theme-color" content="#164e4a">
+  <meta name="google-site-verification" content="q2qzF8geKteqGyjiAmmhsiQsOSkpIEkqJCa12ERFC8Q" />
+  <meta property="og:site_name" content="SECentral">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:title" content="{{ $title }}">
+  <meta property="og:description" content="{{ $description }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="{{ "images/social-preview.png" | absURL }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SECentral — Self-hosted observability for SELinux">
+  <meta name="twitter:card" content="summary_large_image">
+  {{ if .IsPage }}<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
+  <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml" sizes="any">
+  <link rel="icon" href="{{ "favicon-32.png" | relURL }}" type="image/png" sizes="32x32">
+  <link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="16x16 32x32 48x48">
+  <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}" sizes="180x180">
+  <link rel="alternate" type="application/rss+xml" title="SECentral blog" href="{{ "blog/index.xml" | relURL }}">
+  <link rel="preload" href="{{ "fonts/marcellus-latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+  {{ $css := resources.Get "css/site.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+</head>
+<body id="top" tabindex="-1">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="{{ site.Home.RelPermalink }}"><img src="{{ "images/secentral-logo.svg" | relURL }}" width="192" height="52" alt="SECentral home"></a>
+      <nav aria-label="Main navigation">
+        <a href="{{ site.Home.RelPermalink }}#features">Features</a>
+        <a href="{{ site.Home.RelPermalink }}#screenshots">Screenshots</a>
+        <a href="{{ "blog/" | relURL }}" {{ if eq .Section "blog" }}aria-current="{{ if .IsSection }}page{{ else }}true{{ end }}"{{ end }}>Blog</a>
+        <a href="{{ site.Params.github }}">GitHub <span aria-hidden="true">↗</span></a>
+        <a class="button button-small" href="{{ site.Home.RelPermalink }}#get-started">Get started <span aria-hidden="true">→</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">{{ block "main" . }}{{ end }}</main>
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div><a class="wordmark" href="{{ site.Home.RelPermalink }}"><img src="{{ "images/secentral-logo.svg" | relURL }}" width="192" height="52" alt="SECentral home" loading="lazy"></a><p>Understand SELinux.<br>Keep control of your infrastructure.</p></div>
+      <div><h2>Project</h2><a href="{{ site.Params.server }}">Server on GitHub ↗</a><a href="{{ site.Params.agent }}">Agent on GitHub ↗</a><a href="{{ site.Params.server }}/issues">Feedback &amp; contributions</a></div>
+      <div><h2>Resources</h2><a href="{{ site.Params.installation }}">Installation</a><a href="{{ "blog/" | relURL }}">Blog</a><a href="{{ "blog/index.xml" | relURL }}">RSS feed</a></div>
+    </div>
+    <div class="container footer-bottom"><p>© {{ now.Year }} <a href="https://www.linkedin.com/in/molasagasti/" target="_blank" rel="noopener">Mikel Olasagasti</a> · <a href="{{ site.Params.server }}/blob/main/README.md#licensing">MIT</a></p></div>
+  </footer>
+  <dialog class="screenshot-dialog" aria-label="Screenshot gallery">
+    <form method="dialog" class="screenshot-dialog-close"><button aria-label="Close screenshot">×</button></form>
+    <div class="screenshot-dialog-content">
+      <button class="screenshot-previous" type="button" aria-label="Previous screenshot">←</button>
+      <figure><img width="1440" height="900" alt="Screenshot preview"><figcaption aria-live="polite"></figcaption></figure>
+      <button class="screenshot-next" type="button" aria-label="Next screenshot">→</button>
+    </div>
+  </dialog>
+  <a class="back-to-top" href="#top" aria-label="Back to top"><span aria-hidden="true">↑</span></a>
+  {{ $js := resources.Get "js/site.js" | minify | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+</body>
+</html>

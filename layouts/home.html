@@ -1,0 +1,89 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="container">
+    <p class="eyebrow">Open source. Self-hosted. Your infrastructure.</p>
+    <h1>Self-hosted observability<br>for <em>SELinux.</em></h1>
+    <p class="hero-description">Fleet-wide SELinux observability with an application error-tracker mindset. Group related denials into issues, inspect their original audit evidence, and understand host configuration changes—all on your own infrastructure.</p>
+    <div class="actions"><a class="button" href="#get-started">Get started <span aria-hidden="true">→</span></a><a class="button button-secondary" href="{{ site.Params.github }}">View on GitHub <span aria-hidden="true">↗</span></a></div>
+    <div class="hero-product">
+      <div class="window-bar"><span aria-hidden="true">● ● ●</span><span>Your fleet at a glance</span><span class="window-label">SECentral</span></div>
+      {{ partial "screenshot.html" (dict "name" hugo.Data.screenshots.hero.name "priority" true) }}
+    </div>
+  </div>
+</section>
+
+<section class="section container" id="features" aria-labelledby="features-title">
+  <div class="section-heading"><p class="eyebrow">Less noise. More context.</p><h2 id="features-title">An investigation starts<br>where the logs leave off.</h2><p>Bring SELinux evidence together across your hosts, without losing the details that make each denial worth understanding.</p></div>
+  <div class="feature-grid">
+    <article><span class="feature-number">01 / ORGANIZE</span><h3>Grouped issues. Preserved evidence.</h3><p>Group related denials into one issue while keeping each occurrence and its original audit evidence available for investigation.</p></article>
+    <article><span class="feature-number">02 / INVESTIGATE</span><h3>Follow the evidence.</h3><p>Explore original audit records, observed context, and evidence-backed guidance. Similar denials can have different causes on different hosts.</p></article>
+    <article><span class="feature-number">03 / OBSERVE</span><h3>Know your hosts.</h3><p>See agent reporting state, SELinux mode, and observed host configuration in one place. Keep freshness and missing observations in view.</p></article>
+    <article><span class="feature-number">04 / COMPARE</span><h3>Understand differences.</h3><p>Explore observed configuration drift and compare supported settings with applicable policy catalog references. A difference is a lead, not a verdict.</p></article>
+    <article><span class="feature-number">05 / EXPLORE</span><h3>Keep the event trail.</h3><p>Browse the centralized SELinux log alongside grouped issues. Inspect activity across hosts and return to the underlying audit evidence.</p></article>
+    <article><span class="feature-number">06 / OWN</span><h3>Your data. Your decisions.</h3><p>Review evidence and resolution options without treating <code>audit2allow</code> output as proof that access should be allowed. SECentral does not automatically deploy policy changes.</p></article>
+  </div>
+</section>
+
+<section class="architecture section" aria-labelledby="architecture-title">
+  <div class="container architecture-inner">
+    <div class="architecture-heading"><p class="eyebrow">Fleet-wide visibility</p><h2 id="architecture-title">Your hosts.<br>One place to investigate.</h2><p>Lightweight Go agents send SELinux audit evidence and host state to your SECentral server. Investigate denials and configuration drift across your fleet.</p></div>
+    <figure class="fleet-figure">
+      <div class="fleet-diagram">
+        <div class="fleet-hosts">
+          {{ range slice (dict "name" "db01" "distribution" "Red Hat" "logo" "redhat-logo.svg") (dict "name" "web02" "distribution" "Fedora" "logo" "fedora-logo.svg") (dict "name" "app03" "distribution" "SUSE" "logo" "suse-logo.svg") }}
+          <div class="fleet-host"><img src="{{ printf "images/%s" .logo | relURL }}" alt="{{ .distribution }}" width="28" height="28"><span class="fleet-host-kind" aria-hidden="true">{{ .distribution }}</span><strong>{{ .name }}</strong></div>
+          {{ end }}
+        </div>
+        <svg class="fleet-connectors fleet-connectors-horizontal" viewBox="0 0 240 344" preserveAspectRatio="none" aria-hidden="true">
+          <path class="flow-line" d="M0 52H70Q120 52 120 122V147Q120 172 150 172H232M0 172H232M0 292H70Q120 292 120 222V197Q120 172 150 172H232"/>
+          {{ range slice (dict "class" "packet-heartbeat packet-redhat" "label" "Heartbeat" "route" "M0 52H70Q120 52 120 122V147Q120 172 150 172H232" "begin" "0s" "duration" "5s") (dict "class" "packet-heartbeat packet-fedora" "label" "Heartbeat" "route" "M0 172H232" "begin" "-1.7s" "duration" "5s") (dict "class" "packet-heartbeat packet-suse" "label" "Heartbeat" "route" "M0 292H70Q120 292 120 222V197Q120 172 150 172H232" "begin" "-3.4s" "duration" "5s") (dict "class" "packet-avc" "label" "AVC" "route" "M0 52H70Q120 52 120 122V147Q120 172 150 172H232" "begin" "-2.5s" "duration" "6.4s") (dict "class" "packet-policy" "label" "Policy change" "route" "M0 292H70Q120 292 120 222V197Q120 172 150 172H232" "begin" "-0.8s" "duration" "7s") }}
+          <g class="packet {{ .class }}"><rect x="-45" y="-11" width="90" height="22" rx="11"/><text y="4">{{ .label }}</text><animateMotion begin="{{ .begin }}" dur="{{ .duration }}" repeatCount="indefinite" rotate="0" path="{{ .route }}"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.88;1" begin="{{ .begin }}" dur="{{ .duration }}" repeatCount="indefinite"/></g>
+          {{ end }}
+          <path class="flow-arrow" d="M230 167L237 172L230 177Z"/>
+        </svg>
+        <svg class="fleet-connectors fleet-connectors-vertical" viewBox="0 0 300 100" preserveAspectRatio="none" aria-hidden="true">
+          <path class="flow-line" d="M50 0V15Q50 50 85 50H125Q150 50 150 75V92M150 0V92M250 0V15Q250 50 215 50H175Q150 50 150 75V92"/>
+          {{ range slice (dict "class" "packet-heartbeat packet-redhat" "label" "Heartbeat" "route" "M50 0V15Q50 50 85 50H125Q150 50 150 75V92" "begin" "0s" "duration" "5s") (dict "class" "packet-heartbeat packet-fedora" "label" "Heartbeat" "route" "M150 0V92" "begin" "-1.7s" "duration" "5s") (dict "class" "packet-heartbeat packet-suse" "label" "Heartbeat" "route" "M250 0V15Q250 50 215 50H175Q150 50 150 75V92" "begin" "-3.4s" "duration" "5s") (dict "class" "packet-avc" "label" "AVC" "route" "M50 0V15Q50 50 85 50H125Q150 50 150 75V92" "begin" "-2.5s" "duration" "6.4s") (dict "class" "packet-policy" "label" "Policy change" "route" "M250 0V15Q250 50 215 50H175Q150 50 150 75V92" "begin" "-0.8s" "duration" "7s") }}
+          <g class="packet {{ .class }}"><rect x="-45" y="-11" width="90" height="22" rx="11"/><text y="4">{{ .label }}</text><animateMotion begin="{{ .begin }}" dur="{{ .duration }}" repeatCount="indefinite" rotate="0" path="{{ .route }}"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.08;.88;1" begin="{{ .begin }}" dur="{{ .duration }}" repeatCount="indefinite"/></g>
+          {{ end }}
+          <path class="flow-arrow" d="M145 90L150 97L155 90Z"/>
+        </svg>
+        <div class="fleet-server"><img src="{{ "images/secentral-logo.svg" | relURL }}" alt="SECentral server" width="192" height="52" loading="lazy"><p>Your infrastructure</p><ul><li>Audit evidence</li><li>Issues &amp; investigation</li><li>Configuration &amp; drift</li></ul></div>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<section class="section container" id="screenshots" aria-labelledby="screenshots-title">
+  <div class="section-heading"><p class="eyebrow">A closer look</p><h2 id="screenshots-title">From the fleet to the facts.</h2><p>Start with the overview. Follow an issue. Bring the host and its configuration into the investigation.</p></div>
+  <div class="screenshots-grid">
+    {{ range hugo.Data.screenshots.views }}
+    <figure class="product-view">
+      {{ partial "screenshot.html" (dict "name" .name) }}
+      <figcaption><h3>{{ .title }}</h3><p>{{ .caption }}</p></figcaption>
+    </figure>
+    {{ end }}
+  </div>
+</section>
+
+<section class="principle"><div class="container"><p class="eyebrow">Understand before you change</p><h2>A denied operation isn’t automatically<br>an operation that should be allowed.</h2><p>Evidence first. Operator judgment always. No automatic deployment of policy changes.</p></div></section>
+
+<section class="section container roadmap" aria-labelledby="roadmap-title">
+  <div><p class="eyebrow">On the horizon</p><h2 id="roadmap-title">More context.<br>Connected workflows.</h2><p>Upcoming integrations for investigating SELinux alongside the tools and workloads you already use.</p></div>
+  <div class="roadmap-items">
+    <article><span class="badge">Planned</span><div><h3>MCP integration</h3><p>Connect SECentral to MCP-enabled tools.</p></div></article>
+    <article><span class="badge">Planned</span><div><h3>Prometheus metrics</h3><p>Bring SECentral metrics into your monitoring stack.</p></div></article>
+    <article><span class="badge">Planned</span><div><h3>Container &amp; Kubernetes context</h3><p>Connect denials to observed containers, Pods, and workloads.</p></div></article>
+    <article><span class="badge">Planned</span><div><h3>Webhooks &amp; incident routing</h3><p>Route selected issue signals to external systems without alerting on every denial.</p></div></article>
+  </div>
+</section>
+
+<section class="getting-started section" id="get-started" aria-labelledby="start-title">
+  <div class="container">
+    <div class="start-heading"><div><p class="eyebrow">Get started</p><h2 id="start-title">Bring SELinux<br>into focus.</h2></div><p>Deploy SECentral, connect your hosts, and investigate denials and configuration drift from one place.</p></div>
+    <div class="start-grid"><article><span class="step">01</span><h3>Deploy the server</h3><p>Run the containerized server with PostgreSQL and configure your operator account.</p><a href="{{ site.Params.installation }}">Server installation <span aria-hidden="true">↗</span></a></article><article><span class="step">02</span><h3>Connect your hosts</h3><p>Install the Go agent on your SELinux-enabled hosts and point it at your server.</p><a href="{{ site.Params.agent }}#readme">Agent instructions <span aria-hidden="true">↗</span></a></article><article><span class="step">03</span><h3>Start investigating</h3><p>Follow a denial to its evidence, inspect host configuration, and explore differences across your fleet.</p><a href="#screenshots">Explore the interface <span aria-hidden="true">↑</span></a></article></div>
+  </div>
+</section>
+
+<section class="section container latest" aria-labelledby="latest-title"><div><p class="eyebrow">From the project</p><h2 id="latest-title">A little background.</h2><a class="text-link" href="{{ "blog/" | relURL }}">Visit the blog <span aria-hidden="true">→</span></a></div><div>{{ range first 1 (where site.RegularPages "Section" "blog") }}{{ partial "post-card.html" . }}{{ end }}</div></section>
+{{ end }}

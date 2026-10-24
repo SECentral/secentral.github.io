@@ -1,0 +1,24 @@
+baseURL = 'https://secentral.github.io/'
+locale = 'en-US'
+defaultContentLanguage = 'en'
+title = 'SECentral'
+enableRobotsTXT = true
+disableKinds = ['taxonomy', 'term']
+
+[params]
+description = 'Self-hosted observability for SELinux. Investigate denials, understand repeated occurrences, and explore host configuration with SECentral.'
+github = 'https://github.com/SECentral'
+server = 'https://github.com/SECentral/server'
+agent = 'https://github.com/SECentral/agent'
+installation = 'https://github.com/SECentral/server/blob/main/docs/quick-start.md'
+
+[outputs]
+home = ['HTML']
+section = ['HTML', 'RSS']
+page = ['HTML']
+
+[sitemap]
+changeFreq = 'monthly'
+
+[markup.goldmark.renderer]
+unsafe = false

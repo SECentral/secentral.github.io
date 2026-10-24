@@ -1,0 +1,3 @@
+{{ define "main" }}
+<article class="container article section"><header><a class="text-link" href="{{ "blog/" | relURL }}">← Back to the blog</a><p class="eyebrow article-label">From the project</p><h1>{{ .Title }}</h1><p class="post-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time> <span aria-hidden="true">/</span> {{ .ReadingTime }} min read</p><p class="article-description">{{ .Description }}</p></header><div class="prose">{{ .Content }}</div><footer class="article-footer"><p>Have a question or an experience to share?</p><a class="button" href="{{ site.Params.server }}/issues">Join the conversation on GitHub <span aria-hidden="true">↗</span></a></footer></article>
+{{ end }}

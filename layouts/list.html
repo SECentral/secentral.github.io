@@ -1,0 +1,3 @@
+{{ define "main" }}
+<section class="container section blog-index"><header class="section-heading"><p class="eyebrow">The SECentral blog</p><h1>{{ .Title }}</h1><div>{{ .Content }}</div><a class="text-link" href="{{ "blog/index.xml" | relURL }}">Subscribe via RSS <span aria-hidden="true">↗</span></a></header><div class="post-list">{{ range .RegularPages.ByDate.Reverse }}{{ partial "post-card.html" . }}{{ end }}</div></section>
+{{ end }}

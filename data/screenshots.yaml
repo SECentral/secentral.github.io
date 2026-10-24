@@ -1,0 +1,22 @@
+# Add captures under assets/images/screenshots/. A missing file renders an honest placeholder.
+hero:
+  name: dashboard
+  title: The fleet at a glance
+  alt: Dark-mode SECentral overview showing issue activity, fleet health, and seven-day trends.
+views:
+  - name: issue
+    title: Follow a denial to its diagnosis
+    caption: Trace the denial from its observed operation through diagnosis into a host-scoped resolution workspace, with evidence and limitations visible alongside the finding.
+    alt: Dark-mode issue detail for mariadbd showing a getattr denial, a potential mismatch between var_lib_t and mysqld_db_t, the host context, and the start of a resolution workspace.
+  - name: host
+    title: Put the host in context
+    caption: Connect agent health, SELinux mode, policy differences, and issue activity. For permissive hosts, track observation progress toward an enforcing-readiness target—not a guarantee that enforcing is safe.
+    alt: Dark-mode host detail for an AlmaLinux test system showing reporting status, permissive mode, policy comparison, activity totals, and 0–19 percent progress toward a 30-day enforcing-readiness observation target.
+  - name: comparison
+    title: Compare configuration, carefully
+    caption: Compare observed settings with an applicable catalog baseline. Here, the deviations view is filtered to a custom port mapping; unobserved booleans remain counted separately.
+    alt: Dark-mode configuration comparison against the AlmaLinux 9 catalog, with a filtered TCP port 48372 mapping difference and separate counts for unobserved booleans.
+  - name: log
+    title: Keep the underlying event trail
+    caption: Browse policy loads alongside enforced and non-enforced AVCs across hosts, then follow links to the original occurrence or grouped issue.
+    alt: Light-mode global SELinux log showing host and time filters, policy loads, enforced and non-enforced AVCs, and links to occurrences and issues.
