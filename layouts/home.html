@@ -68,13 +68,18 @@
 
 <section class="principle"><div class="container"><p class="eyebrow">Understand before you change</p><h2>A denied operation isn’t automatically<br>an operation that should be allowed.</h2><p>Evidence first. Operator judgment always. No automatic deployment of policy changes.</p></div></section>
 
+<section class="container integration" id="prometheus" aria-labelledby="prometheus-title">
+  <div><p class="eyebrow">Prometheus metrics · Available</p><h2 id="prometheus-title">Bring SELinux visibility into your monitoring stack.</h2><p>Export aggregate issue counts, host SELinux modes, and agent reporting states to Prometheus through an authenticated metrics endpoint.</p></div>
+  <a class="button button-secondary" href="{{ site.Params.server }}/blob/main/docs/metrics.md">Configure Prometheus <span aria-hidden="true">↗</span></a>
+</section>
+
 <section class="section container roadmap" aria-labelledby="roadmap-title">
-  <div><p class="eyebrow">On the horizon</p><h2 id="roadmap-title">More context.<br>Connected workflows.</h2><p>Upcoming integrations for investigating SELinux alongside the tools and workloads you already use.</p></div>
+  <div><p class="eyebrow">Project roadmap</p><h2 id="roadmap-title">More context.<br>Connected workflows.</h2><p>Delivered and upcoming integrations for investigating SELinux alongside the tools and workloads you already use.</p></div>
   <div class="roadmap-items">
     <article><span class="badge">Planned</span><div><h3>MCP integration</h3><p>Connect SECentral to MCP-enabled tools.</p></div></article>
-    <article><span class="badge">Planned</span><div><h3>Prometheus metrics</h3><p>Bring SECentral metrics into your monitoring stack.</p></div></article>
     <article><span class="badge">Planned</span><div><h3>Container &amp; Kubernetes context</h3><p>Connect denials to observed containers, Pods, and workloads.</p></div></article>
     <article><span class="badge">Planned</span><div><h3>Webhooks &amp; incident routing</h3><p>Route selected issue signals to external systems without alerting on every denial.</p></div></article>
+    <article><span class="badge badge-done">Done</span><div><h3><a href="#prometheus">Prometheus metrics</a></h3><p>Bring SECentral metrics into your monitoring stack.</p></div></article>
   </div>
 </section>
 
