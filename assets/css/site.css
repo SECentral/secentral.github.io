@@ -176,6 +176,7 @@ section[id] { scroll-margin-top: 2rem; }
 .article-description { margin-top: 1.5rem; font-size: 1.12rem; }
 .prose { margin-top: 3rem; border-top: 1px solid var(--line); padding-top: 1rem; }
 .prose h2 { font-size: 2rem; margin-top: 2.5rem; }
+.prose h3 { margin-top: 2rem; }
 .prose p, .prose ul { margin-top: 1.3rem; }
 .prose li { padding-left: .3rem; margin-block: .6rem; color: var(--muted); }
 .prose strong { color: var(--ink); }
