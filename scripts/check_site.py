@@ -94,9 +94,9 @@ def check():
     for value in ["db01", "Red Hat", "web02", "Fedora", "app03", "SUSE", "Heartbeat", "AVC", "Policy change"]:
         assert value in home, f"Missing fleet diagram content: {value}"
     assert "Linux host" not in home and "Pause animation" not in home and "Explore the agent" not in home
-    assert "class=screenshot-dialog" in home
-    assert "method=dialog" in home and 'aria-label="Previous screenshot"' in home
-    assert 'aria-label="Next screenshot"' in home and "aria-live=polite" in home
+    assert 'class="screenshot-dialog"' in home
+    assert 'method="dialog"' in home and 'aria-label="Previous screenshot"' in home
+    assert 'aria-label="Next screenshot"' in home and 'aria-live="polite"' in home
     for name in ["secentral-logo", "secentral-mark"]:
         logo = ET.parse(ROOT / "images" / f"{name}.svg").getroot()
         assert logo.find("{*}title") is not None and logo.find("{*}text") is None, "Logo must have a title and outlined lettering"
